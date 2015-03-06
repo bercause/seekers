@@ -38,21 +38,26 @@ function initializePage() {
 		var verification = $('#post-new-found-form #new-found-verification').val();
 		var image_url = $('#post-new-found-form #new-found-image').val();
 		var currentdate = new Date(); 
+		var dt = new Date().toString();
+		console.log(dt); // Mon Jul 16 2012 15:21:09 GMT+0530 (India Standard Time)
+		var currentTime = dt.substr(0, dt.indexOf('GMT'));
+		console.log(currentTime); // Mon Jul 16 2012 15:21:09 
 		var json = {
 			// the author information is gathered from the server
 			"title": title,
 			// the date and time information is set automatically according to the system time
 			"date": currentdate,
+			"time": currentTime,
 			"location": location,
 			"description": description,
-			"verification": verification,
+			"verification": "not used",
 			"imageURL": image_url
 		};
 		$.post('/post-found/new', json, function() {
 			// if successfully post, the current user add a new post 
 			$.post('/edit-profile/postNumberPlusOne', function () { 
-				// redirect to found gallery (logined-found.handlebars)
-				window.location.href = '/logined-found'; 
+				// redirect to found gallery in the server (post-found.js)
+				// window.location.href = '/logined-found'; 
 			});
 		});
 	});
@@ -68,11 +73,16 @@ function initializePage() {
 		var description = $('#post-new-lost-form #new-lost-description').val();
 		var image_url = $('#post-new-lost-form #new-lost-image').val();
 		var currentdate = new Date(); 
+		var dt = new Date().toString();
+		console.log(dt); // Mon Jul 16 2012 15:21:09 GMT+0530 (India Standard Time)
+		var currentTime = dt.substr(0, dt.indexOf('GMT'));
+		console.log(currentTime); // Mon Jul 16 2012 15:21:09 
 		var json = {
 			// the author information is gathered from the server
 			"title": title,
 			// the date and time information is set automatically according to the system time
 			"date": currentdate,
+			"time": currentTime,
 			"location": location,
 			"description": description,
 			"imageURL": image_url
@@ -80,8 +90,8 @@ function initializePage() {
 		$.post('/post-lost/new', json, function() { 
 			// if successfully post, the current user add a new post 
 			$.post('/edit-profile/postNumberPlusOne', function () { 
-				// redirect to lost gallery (logined-lost.handlebars)
-				window.location.href = '/logined-lost';  
+				// redirect to lost gallery in the server (post-lost.js)
+				// window.location.href = '/logined-lost';  
 			});
 		});
 	});
@@ -144,22 +154,22 @@ function initializePage() {
 		 */
 		function passwordCheck(account_json) {
 			var accountPassword = account_json['password'];
-			console.log("accountPassword: " + accountPassword);
-			if (accountPassword !== inputPassword)
+			// console.log("accountPassword: " + accountPassword);
+			var currentAccount = getCookie("currentAccount");
+			if (currentAccount !== "")
+			{
+				alert("you have already logined to an account, please logout first");
+			}
+			else if (accountPassword !== inputPassword)
 			{
 				passwordNotMatch();
 				return;
-			}	
+			}
 			else
 			{   // successfully logined, change the current accoun
 				alert("welcome back " + account_json["name"] + "!");
 
-				localforage.setItem('currentAccount', account_json['name'], function(err, value) {
-    				// Do other things once the value has been saved.
-    				console.log("currentAccount: "+value);
-				});
-
-				$.post('/account/save-current', {name: account_json["name"]}, function() {});
+				document.cookie = "currentAccount = " + account_json['name'] + ";";
 
 				// redirect the page to logined page
 				window.location.href = '/logined-index'; 
@@ -195,8 +205,8 @@ function initializePage() {
 		};
 
 		$.post('/edit-profile', {json: json} , function() {
-			// redirect to the profile page for user to check
-			window.location.href = '/account-profile';  
+			// redirect to the profile page in the server (account-profile-edit.js)
+			// window.location.href = '/account-profile';  
 		});
 
 	});
@@ -267,8 +277,8 @@ function initializePage() {
 		};
 
 		$.post('/myPost/'+idNumber+'/edit', {json: json}, function() {
-			// redirect to check my post
-			window.location.href = '/account-mypost'; 
+			// redirect to check my post (in the server account-mypost.js)
+			// window.location.href = '/account-mypost'; 
 		});
 
 	});
@@ -295,7 +305,7 @@ function initializePage() {
 
 
 	/**
-	 * Search for the related item (listening to the submit button in index.handlebars, logined-index.handlebars)
+	 * Search for the related item (listening to the submit button in logined-index.handlebars)
 	 */
 	$('#searchSubmitButton').click(function(e) {
 		console.log('clicked searchSubmitButton');
@@ -329,6 +339,28 @@ function initializePage() {
 		}
 	});
 
+	/**
+	 * Search for the related item (listening to the submit button in logined-index-alternative.handlebars)
+	 */
+	$('#searchSubmitButtonAlternative').click(function(e) {
+		console.log('clicked searchSubmitButtonAlternative');
+		var searchLost = $('#search-form #search-lost').val();
+		console.log("searchLost: "+searchLost+" Its length: "+searchLost.length);
+		if (searchLost.length !==0)
+		{   // post the item to search and display all the related items in the lost gallery
+			$.post('/search-post/all', { item: searchLost }, function() { 
+				// redirect to lost gallery (logined-lost.handlebars)
+				window.location.href = '/search-post-alternative';  
+			});
+		}
+		else 
+		{   // alert the user that he/she has not enter any thing and click search
+			alert("please enter the item you want to search for and click search");
+			return;
+		}
+	});
+
+
 	/** 
 	 * alert the user to login when the user want to see other's profile
 	 * prevent refresh the page by preventDefault()
@@ -339,10 +371,38 @@ function initializePage() {
 		seeProfileNeedLogin();
 	});
 
+	/**
+	 * A/B test: tracking the back button for search in version_a 
+	 */
+	$(".version_a").click(function() {
+		woopra.track("a_version_search_back_click", {}, function () {
+			window.location.href = '/logined-index';  
+		});
+	});
+
+	/**
+	 * A/B test: tracking the back button for search in version_b 
+	 */
+	$(".version_b").click(function() {
+		woopra.track("b_version_search_back_click", {}, function () {
+			window.location.href = '/logined-index-alternative';  
+		});
+	});
+
+
+}
+
+
 // initializePage end here
-} 
 
 
+/**
+ * Go back to the last page button
+ */
+function goBack() {
+	console.log('clicked goBackButton');
+ 	window.history.back();
+}
 
 function passwordNotMatch() {
 	alert("the name and password you entered can not match")
@@ -365,5 +425,17 @@ function seeProfileNeedLogin() {
 }
 
 function logoutSuccess() {
-	alert("You have logout");
+	document.cookie = "currentAccount = " + " " + ";";
+	// alert("You have logout");
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
 }

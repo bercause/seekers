@@ -60,7 +60,7 @@
 
 
 
-			<div class = "container">
+				<div class = "container">
 					<div class="row navbar navbar-static-top">
 
 						<div  class="container nav-link col-md-3" id="menu-toggle">
@@ -77,46 +77,49 @@
 
 						<div class="container navbar-right nav-link dropdown col-md-3 menu-close">
 
-						<a href="#" onclick="postNeedLogin()" class = "dropdown-toggle" data-toggle = "dropdown">New Post <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+						<a href="#login " data-toggle="modal" onclick="postNeedLogin()" class = "dropdown-toggle" data-toggle = "dropdown">New Post <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 
 
 
 						</div>
 
 					</div>
-			</div>
+				</div>
 
 
         	
-        	<div  class = "page-table">
+	        	<div  class = "page-table">
 
-	        	<div class = "page-cell">
-					<div class="container menu-close"> 
-<!-- the above are navigation bars -->
-<!-- all page content start here -->
+		        	<div class = "page-cell">
+						<div class="container menu-close"> 
+	<!-- the above are navigation bars -->
+	<!-- all page content start here -->
+							<div class="about">
+								<div class="panel panel-default about-panel">
+									<div class="panel-body">
+										<div class="about-title">seeker.</div>
+										<div class="about-subtitle">YOUR TRITON LOST & FOUND</div>
+										
+										<div class="container about-paragraphs">
+											<i>Welcome to the UCSD Seeker app.</i><br><br>
+											
+											This application aims to connect students who have lost or found<br>
+											items on campus. By providing a centralized location for posting about<br>
+											missing items, we can <b>minimize search times</b> for busy UCSD students.<br><br>
 
-						<div class="title">
-							<h1>seeker.</h1>
-							<h2>YOUR TRITON LOST & FOUND</h2>
+											Navigate our site using the tabs in the bar above.<br>
+											The <b>Lost</b> button will bring you to posts regarding recently lost items.<br>
+											Similarly, the <b>Found</b> button will bring up posts about recently found items.<br>
+											Use the <b>Search</b> feature if you are looking for something specific.
+										</div>
+									</div>
+									<div class="panel-footer">
+										<i>contact us: <a href="#" class = "about-contact" >seekershci@gmail.com</a>.</i>
+									</div>
+								</div>
 
-
-							<div class="container about-paragraphs">
-								<i>Welcome to the UCSD Seeker app.</i><br><br>
-
-								This application aims to connect students who have lost or found<br>
-								items on campus. By providing a centralized location for posting about<br>
-								missing items, we can <b>minimize search times</b> for busy UCSD students.<br><br>
-
-								Navigate our site using the tabs in the bar above.<br>
-								The <b>Lost</b> button will bring you to posts regarding recently lost items.<br>
-								Similarly, the <b>Found</b> button will bring up posts about recently found items.<br>
-								Use the <b>Search</b> feature if you are looking for something specific.
 							</div>
-
-						</div>
-
 <!-- all page content end here -->
-
 					</div>
 				</div>
 
@@ -129,126 +132,7 @@
     <!-- /#wrapper -->
 
 
-
-
-<!-- Login form start here -->
-
-
-	<div class = "modal fade" id = "login" role = "dialog">
-		<div class = "modal-dialog">
-			<div class = "modal-content">
-				<form class = "form-horizontal" id="login-form">
-					<div class = "modal-header">
-						<h4>Welcome to Seeker!</h4>
-					</div>
-
-
-					<div class = "modal-body">
-
-						<div class = "form-group">
-
-							<label for = "login-name" class = "col-lg-2 control-label">Name:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "login-name" placeholder = "Phone,email or username">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "login-password" class = "col-lg-2 control-label">Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "login-password" placeholder = "Password">
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class = "modal-footer">
-						<a class = "btn btn-success pull-left" type = "submit" data-dismiss = "modal" href="#sign-up" data-toggle="modal">Sign up now</a>
-						<a class = "btn btn-default" data-dismiss = "modal">Close</a>
-						<a class = "btn btn-primary" id="loginRequestSubmitButton" type = "submit">Login</a>
-					</div>
-
-				</form>
-
-
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<div class = "modal fade" id = "sign-up" role = "dialog">
-		<div class = "modal-dialog">
-			<div class = "modal-content">
-				<form class = "form-horizontal" id="sign-up-form">
-					<div class = "modal-header">
-						<h4>Welcome to Seeker!</h4>
-					</div>
-
-
-					<div class = "modal-body">
-
-						<div class = "form-group">
-
-							<label for = "sign-up-name" class = "col-lg-2 control-label">Name:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-name" placeholder = "name">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "sign-up-email" class = "col-lg-2 control-label">Email:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-email" placeholder = "you@example.com">
-							</div>
-						</div>
-
-
-
-						<div class = "form-group">
-
-							<label for = "sign-up-password" class = "col-lg-2 control-label">Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-password" placeholder = "Password">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "sign-up-password-confirm" class = "col-lg-2 control-label">Confirm Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-password-confirm" placeholder = "Confirm Password">
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class = "modal-footer">
-						<a class = "btn btn-default" data-dismiss = "modal">Close</a>
-						<a class = "btn btn-primary" id="newAccountCreateButton" type = "submit">Creat Account</a>
-					</div>
-
-				</form>
-
-
-			</div>
-		</div>
-	</div>
-
-
-<!-- Login form end here -->
-
+  {{> login-form-html}}
 
 	<script src="/js/jquery-1.11.0.js"></script>
 	<script src="js/bootstrap.min.js"></script>

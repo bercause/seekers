@@ -80,10 +80,10 @@
 							<ul class = "dropdown-menu 'pull-right'">
 							
 
-								<li><a href="/account-message">Mail <span class="badge">4</span></a></li>
+								<!-- <li><a href="/account-message">Mail <span class="badge">4</span></a></li> -->
 								<li><a href="/account-mypost">My Post</a></li>
 								<li><a href="/account-profile">Profile</a></li>
-								<li><a href = "/" onclick="logoutSuccess()" >Logout</a></li>
+								<li><a  href="#logout "data-toggle="modal">Logout</a></li>
 
 							</ul>
 							<!-- </div> -->
@@ -134,24 +134,18 @@
 
 
 
-							<form>
+							<form id="uploadForm" enctype="multipart/form-data" action="/api/photo/found" method="post">
 							  <div class="form-group">
 							    <label for="exampleInputEmail1">Description</label>
 							    <textarea class="form-control" id="new-found-description" placeholder="Tell us about how you find it..." style="margin: 0px; width: 100%; border-radius: 4px;"></textarea>
 							  </div>
 
 
-							  <div class="form-group">
-							    <label for="exampleInputPassword1">Set Verification Question</label>
-							    <input type="text" class="form-control" id="new-found-verification" placeholder="What's the drawing on the skatebord?/...">
-							  </div>
-
 
 							  <!-- upload picture -->
 							  <div class="form-group">
-							    <label for="exampleInputImage">Image URL</label>
-							    <textarea class="form-control" id="new-found-image" placeholder="http://stockarch.com/files/12/03/skateboard.jpg" style="margin: 0px; width: 100%; border-radius: 4px;"></textarea>
-							    <p class="help-block">Please search for similar item in the internet and put the image URL here.</p>
+							    <label for="exampleInputImage">Upload Image</label>
+							    <input type="file" name="userPhoto" class="form-control" id="new-found-image">
 							  </div>
 
 							  <!-- submit button -->
@@ -164,7 +158,7 @@
 							  	</div>
 
 							  	<div class = "col-xs-4">
-							  		<button id="newFoundItemSubmitButton" type="button" class="btn btn-primary">Submit</button>
+							  		<button id="newFoundItemSubmitButton" type="submit" class="btn btn-primary">Submit</button>
 							  	</div>
 
 							  	<div class = "col-xs-2">
@@ -190,6 +184,29 @@
 
     </div>
     <!-- /#wrapper -->
+    
+<!-- logout comfirt form is here -->
+
+<div class = "modal fade" id = "logout" role = "dialog">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <form class = "form-horizontal" id="logout-form">
+                    <div class = "modal-header">
+                        <h4>Do you want to logout? </h4>
+                    </div>
+
+
+                    <div class = "modal-footer">
+                        <a class = "btn btn-default" data-dismiss = "modal">No </a>
+                        <a href="/" class = "btn btn-primary" onclick="logoutSuccess()" type = "submit">Yes</a>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
 
 
 

@@ -77,9 +77,7 @@
 						<div class="container navbar-right nav-link dropdown col-md-3 menu-close">
 
 						
-						<a href="#" onclick="postNeedLogin()" class = "dropdown-toggle" data-toggle = "dropdown">New Post <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-
-
+						<a href="#login " data-toggle="modal" onclick="postNeedLogin()" class = "dropdown-toggle" data-toggle = "dropdown">New Post <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 
 						</div>
 
@@ -92,27 +90,14 @@
 
 	        	<div class = "page-cell">
 					<div class="container">
-						<div class = "row losing-items">
-							{{#each found-items}}
-
-								<div class = "col-xs-5">
-										<h3>{{title}}</h3>
-										<h4>Posted at {{date}}</h4>
-								</div>
-
-								<div class = "col-xs-7">
-										<img src="{{imageURL}}" class="img-responsive"> 
-								</div>
-
-								<div class = "col-xs-12">
-									<p>{{description}}</p>
-									<!-- fake hyperlink, actually redirect through the click listener -->
-									<i>For more information, contact <a href="#" class="seeProfileNeedLogin" author="{{author}}">{{author}}</a>.</i>
-									<hr>
-								</div>
+						<div class="gallery-title"> Found Gallery </div>
+							<div class = "row losing-items">
+								{{#each found-items}}
 								
-							{{/each}}
-						</div>
+									{{> post-item-display}}
+									
+								{{/each}}
+							</div>
 					</div>
 				</div>
 
@@ -125,125 +110,9 @@
     <!-- /#wrapper -->
 
 
+  {{> login-form-html}}
 
 
-<!-- Login form start here -->
-
-
-	<div class = "modal fade" id = "login" role = "dialog">
-		<div class = "modal-dialog">
-			<div class = "modal-content">
-				<form class = "form-horizontal" id="login-form">
-					<div class = "modal-header">
-						<h4>Welcome to Seeker!</h4>
-					</div>
-
-
-					<div class = "modal-body">
-
-						<div class = "form-group">
-
-							<label for = "login-name" class = "col-lg-2 control-label">Name:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "login-name" placeholder = "Phone,email or username">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "login-password" class = "col-lg-2 control-label">Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "login-password" placeholder = "Password">
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class = "modal-footer">
-						<a class = "btn btn-success pull-left" type = "submit" data-dismiss = "modal" href="#sign-up" data-toggle="modal">Sign up now</a>
-						<a class = "btn btn-default" data-dismiss = "modal">Close</a>
-						<a class = "btn btn-primary" id="loginRequestSubmitButton" type = "submit">Login</a>
-					</div>
-
-				</form>
-
-
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<div class = "modal fade" id = "sign-up" role = "dialog">
-		<div class = "modal-dialog">
-			<div class = "modal-content">
-				<form class = "form-horizontal" id="sign-up-form">
-					<div class = "modal-header">
-						<h4>Welcome to Seeker!</h4>
-					</div>
-
-
-					<div class = "modal-body">
-
-						<div class = "form-group">
-
-							<label for = "sign-up-name" class = "col-lg-2 control-label">Name:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-name" placeholder = "name">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "sign-up-email" class = "col-lg-2 control-label">Email:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-email" placeholder = "you@example.com">
-							</div>
-						</div>
-
-
-
-						<div class = "form-group">
-
-							<label for = "sign-up-password" class = "col-lg-2 control-label">Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-password" placeholder = "Password">
-							</div>
-						</div>
-
-						<div class = "form-group">
-
-							<label for = "sign-up-password-confirm" class = "col-lg-2 control-label">Confirm Password:</label>
-							<div class = "col-lg-10">
-
-								<input type = "text" class = "form-contol" id = "sign-up-password-confirm" placeholder = "Confirm Password">
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class = "modal-footer">
-						<a class = "btn btn-default" data-dismiss = "modal">Close</a>
-						<a class = "btn btn-primary" id="newAccountCreateButton" type = "submit">Creat Account</a>
-					</div>
-
-				</form>
-
-
-			</div>
-		</div>
-	</div>
-
-
-<!-- Login form end here -->
 
 	<script src="/js/jquery-1.11.0.js"></script>
 	<script src="js/bootstrap.min.js"></script>

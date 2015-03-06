@@ -2,10 +2,12 @@ var models = require('../models');
 
 exports.view = function(req, res){
 
-	models.CurrentAccount // get the current account from the database
-		.find({"id": 1},{"name": 1, "_id": 0}, function (err, docs) {
-			var currentAccountArr = docs.map(function(d){ return d.toObject() });
-			var currentName = currentAccountArr[0].name;
+	// models.CurrentAccount // get the current account from the database
+	// 	.find({"id": 1},{"name": 1, "_id": 0}, function (err, docs) {
+	// get the current account from the database
+	var currentName = req.cookies.currentAccount;
+			// var currentAccountArr = docs.map(function(d){ return d.toObject() });
+			// var currentName = currentAccountArr[0].name;
 
 			models.FoundGallery // get the post from the database 
 				.find({"author": currentName})
@@ -33,9 +35,13 @@ exports.view = function(req, res){
 						.sort('date')
 						.exec(renderItemsFromFoundAndLost);
 			}
-		});
+		// });
 
 };
+
+
+
+
 
 exports.deleteItem = function(req, res) {
   var itemID = req.params.id;

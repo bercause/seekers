@@ -28,7 +28,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+  {{> tracking_code_script}}
 </head>
 
 
@@ -80,10 +80,10 @@
 							<ul class = "dropdown-menu 'pull-right'">
 							
 
-								<li><a href="/account-message">Mail <span class="badge">4</span></a></li>
+								<!-- <li><a href="/account-message">Mail <span class="badge">4</span></a></li> -->
 								<li><a href="/account-mypost">My Post</a></li>
 								<li><a href="/account-profile">Profile</a></li>
-								<li><a href = "/" onclick="logoutSuccess()" >Logout</a></li>
+								<li><a  href="#logout "data-toggle="modal">Logout</a></li>
 
 							</ul>
 							<!-- </div> -->
@@ -113,26 +113,32 @@
 
 	        	<div class = "page-cell">
 					<div class="container">
+						<div class="gallery-title"> Search Result </div>
 						<div class = "row losing-items">
+
+							<div class = "col-xs-12">
 							{{#each search-items}}
-
-								<div class = "col-xs-5">
-										<h3>{{title}}</h3>
-										<h4>Posted at {{date}}</h4>
-								</div>
-
-								<div class = "col-xs-7">
-										<img src="{{imageURL}}" class="img-responsive"> 
-								</div>
-
-								<div class = "col-xs-12">
-									<p>{{description}}</p>
-									<!-- fake hyperlink, actually redirect through the click listener -->
-									<i>For more information, contact <a href="#" class = "author-of-post" author="{{author}}">{{author}}</a>.</i>
-									<hr>
-								</div>
+							
+								{{> post-item-display}}
 
 							{{/each}}
+							</div>
+
+							<div class = "col-xs-12">
+							{{#each no-result}}
+								<h2>No match item post, try another keyword or check it in the Lost/Found Gallery </h2>
+							{{/each}}
+							</div>
+
+
+							<div class = "col-xs-1">
+							</div>
+
+							<div class = "col-xs-3">
+								<div class="panel-footer"><a href="#" class="version_a" >Back</a></div>
+							</div>
+
+
 						</div>
 					</div>
 				</div>
@@ -145,6 +151,28 @@
     </div>
     <!-- /#wrapper -->
 
+<!-- logout comfirt form is here -->
+
+    <div class = "modal fade" id = "logout" role = "dialog">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <form class = "form-horizontal" id="logout-form">
+                    <div class = "modal-header">
+                        <h4>Do you want to logout? </h4>
+                    </div>
+
+
+                    <div class = "modal-footer">
+                        <a class = "btn btn-default" data-dismiss = "modal">No </a>
+                        <a href="/" class = "btn btn-primary" onclick="logoutSuccess()" type = "submit">Yes</a>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
 
 
 	<script src="/js/jquery-1.11.0.js"></script>
